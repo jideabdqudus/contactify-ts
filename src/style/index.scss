@@ -45,3 +45,34 @@ body {
     font-weight: 700;
   }
 }
+
+.form-layout {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .register_form {
+    width: 400px;
+
+    label {
+      @extend %custom-label;
+    }
+
+    Button {
+      @extend %custom-button;
+    }
+  }
+
+  .login_form {
+    width: 400px;
+
+    label {
+      @extend %custom-label;
+    }
+
+    Button {
+      @extend %custom-button;
+    }
+  }
+}
