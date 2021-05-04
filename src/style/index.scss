@@ -76,3 +76,27 @@ body {
     }
   }
 }
+
+//Dashboard
+
+.add-contact-layout {
+  h1 {
+    text-align: center;
+    color: $primary-color;
+    font-weight: 600;
+  }
+  .contact_form {
+    Button {
+      @extend %custom-button;
+    }
+
+    .label-tag {
+      font-size: 15px;
+      font-weight: 600;
+    }
+  }
+}
+
+.filter {
+  padding-top: 10px;
+}
