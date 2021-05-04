@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Form, Input, Button, Radio, Checkbox } from "antd";
+import React from "react";
+import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 interface Props {}
 
-const Register: React.FC<Props> = () => {
+const RegisterForm: React.FC<Props> = () => {
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
   };
@@ -61,4 +61,4 @@ const Register: React.FC<Props> = () => {
   );
 };
 
-export default Register;
+export default RegisterForm;
