@@ -100,3 +100,20 @@ body {
 .filter {
   padding-top: 10px;
 }
+
+.contact-layout {
+  h3 {
+    color: $primary-color;
+    font-size: 17px;
+  }
+  p {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  Button {
+    @extend %custom-button;
+    color: white;
+    margin: 5px;
+  }
+}

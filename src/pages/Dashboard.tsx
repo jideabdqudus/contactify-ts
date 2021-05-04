@@ -1,6 +1,7 @@
 import React from "react";
 import AddContacts from "../components/add_contacts/index";
 import Filter from "../components/filter/index";
+import Contacts from "../components/contacts";
 
 import { Row, Col } from "antd";
 
@@ -14,6 +15,7 @@ const Dashboard: React.FC = () => {
         <Col span={3}></Col>
         <Col span={9}>
           <Filter />
+          <Contacts />
         </Col>
       </Row>
     </div>
