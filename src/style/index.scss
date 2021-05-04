@@ -1,0 +1,36 @@
+//Nesting
+//Modules Import
+//Inheritance
+//Conditionals
+//Mixins and Functions
+
+@import "config";
+
+body {
+  font-family: $font-stack;
+}
+
+.navbar {
+  &-bg {
+    background-color: $primary-color;
+    height: 70px;
+  }
+
+  h1 {
+    font-weight: bolder;
+    color: $secondary-color;
+    padding: 20px;
+    display: inline;
+    font-size: 30px;
+    margin: 20px;
+  }
+  &-links {
+    float: right;
+    span {
+      color: $secondary-color;
+      font-size: 14px;
+      font-weight: 400;
+      margin: 1rem;
+    }
+  }
+}
