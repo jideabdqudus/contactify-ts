@@ -7,8 +7,8 @@ body {
 .navbar {
   &-bg {
     background-color: $primary-color;
-   // height: 70px;
-   padding: 15px;
+    // height: 70px;
+    padding: 15px;
   }
 
   h1 {
@@ -20,11 +20,28 @@ body {
   }
   &-links {
     float: right;
-    span {
+    padding-top: 10px;
+    .custom-nav-link {
       color: $secondary-color;
       font-size: 16px;
       font-weight: 600;
       margin: 1rem;
+
+      &:hover {
+        color: lighten($primary-color, 40%);
+      }
     }
+  }
+}
+
+//Register Page
+
+.register {
+  margin: 20px;
+
+  .title-header {
+    text-align: center;
+    color: $primary-color;
+    font-weight: 700;
   }
 }
