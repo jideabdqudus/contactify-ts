@@ -14,8 +14,8 @@ const Contacts: React.FC = () => {
           <p>
             <PhoneOutlined /> 08092399019
           </p>
-          <Button style={{backgroundColor:"#333"}}>Edit</Button>
-          <Button style={{backgroundColor:"red"}}>Delete</Button>
+          <Button style={{ backgroundColor: "#333" }}>Edit</Button>
+          <Button style={{ backgroundColor: "red" }}>Delete</Button>
         </Card>
       </Badge.Ribbon>
     </div>
