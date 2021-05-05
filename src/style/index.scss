@@ -102,6 +102,10 @@ body {
 }
 
 .contact-layout {
+  .card-bg {
+    background-color: $secondary-color;
+  }
+
   h3 {
     color: $primary-color;
     font-size: 17px;

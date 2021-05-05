@@ -6,7 +6,7 @@ const Contacts: React.FC = () => {
   return (
     <div className="contact-layout">
       <Badge.Ribbon text="Professional">
-        <Card>
+        <Card className="card-bg">
           <h3>Sameerah Ajenifuja</h3>
           <p>
             <MailOutlined /> asameerah@gmail.com
@@ -14,7 +14,7 @@ const Contacts: React.FC = () => {
           <p>
             <PhoneOutlined /> 08092399019
           </p>
-          <Button style={{backgroundColor:"green"}}>Edit</Button>
+          <Button style={{backgroundColor:"#333"}}>Edit</Button>
           <Button style={{backgroundColor:"red"}}>Delete</Button>
         </Card>
       </Badge.Ribbon>
