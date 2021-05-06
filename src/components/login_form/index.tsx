@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
 
-interface Props {
-  
+interface Props {}
+
+interface FormNode {
+  email: string;
+  password: string;
 }
 
 const LoginForm: React.FC<Props> = () => {
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+  const [formData, setFormData] = useState<FormNode>({
+    email: "",
+    password: "",
+  });
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const onFinish = (values: any) => {
+    console.log(formData);
+  };
+
+  const { email, password } = formData;
 
   return (
     <div className="form-layout">
@@ -23,14 +37,19 @@ const LoginForm: React.FC<Props> = () => {
           name="email"
           rules={[{ required: true, message: "Please input your Email" }]}
         >
-          <Input type="email" name="email" />
+          <Input type="email" name="email" onChange={onChange} value={email} />
         </Form.Item>
         <label>Password</label>
         <Form.Item
           name="password"
           rules={[{ required: true, message: "Please input your Password" }]}
         >
-          <Input type="password" name="password" />
+          <Input
+            type="password"
+            name="password"
+            onChange={onChange}
+            value={password}
+          />
         </Form.Item>
 
         <Form.Item>
