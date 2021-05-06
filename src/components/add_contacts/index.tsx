@@ -74,7 +74,12 @@ const AddContacts: React.FC<Props> = () => {
             { required: true, message: "Please Input Contact Phone Number" },
           ]}
         >
-          <InputNumber name="phone" value={phone} onChange={onHandleChange} />
+          <InputNumber
+            name="phone"
+            value={phone}
+            onChange={onHandleChange}
+            style={{ width: "100%" }}
+          />
         </Form.Item>
 
         <Form.Item>

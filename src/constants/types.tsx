@@ -1,0 +1,1 @@
+export const CREATE_ACCOUNT: any = CREATE_ACCOUNT;
