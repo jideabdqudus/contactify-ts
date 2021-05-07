@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
+import { useDispatch } from "react-redux";
+
+import { register } from "../../actions/authAction";
 
 interface Props {}
 
@@ -11,6 +14,8 @@ interface FormNode {
 }
 
 const RegisterForm: React.FC<Props> = () => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState<FormNode>({
     username: "",
     email: "",
@@ -23,7 +28,7 @@ const RegisterForm: React.FC<Props> = () => {
   };
 
   const onFinish = () => {
-    console.log(formData);
+    dispatch(register(formData));
   };
 
   const { username, email, password, confirmPassword } = formData;

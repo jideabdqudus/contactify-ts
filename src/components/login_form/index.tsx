@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
+import { useDispatch } from "react-redux";
+
+import { login } from "../../actions/authAction";
 
 interface Props {}
 
@@ -9,6 +12,8 @@ interface FormNode {
 }
 
 const LoginForm: React.FC<Props> = () => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState<FormNode>({
     email: "",
     password: "",
@@ -19,7 +24,7 @@ const LoginForm: React.FC<Props> = () => {
   };
 
   const onFinish = (values: any) => {
-    console.log(formData);
+    dispatch(login(formData));
   };
 
   const { email, password } = formData;
