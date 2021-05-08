@@ -1,4 +1,5 @@
 export interface IAuth {
+  id: number,
   username: string;
   mail: string;
   password: string;
@@ -6,6 +7,7 @@ export interface IAuth {
 
 
 export interface IContact {
+  id?: number,
   name: string;
   email: string;
   phone: number;
