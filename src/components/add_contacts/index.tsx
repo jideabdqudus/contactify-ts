@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Radio, InputNumber } from "antd";
-import { IContact, IContacts } from "../../type.d";
-import { addContact } from "../../actions/contactAction";
 import { useDispatch, useSelector } from "react-redux";
+
+import { IContact, IContacts } from "../../type.d";
+import { addContact, editContact, clearAll } from "../../actions/contactAction";
 
 interface Props {}
 
@@ -43,17 +44,19 @@ const AddContacts: React.FC<Props> = () => {
   };
 
   const onFinish = () => {
-    dispatch(addContact(formData));
-    console.log(formData);
+    if (current == null) {
+      dispatch(addContact(formData));
+    } else {
+      dispatch(editContact(formData));
+    }
+    dispatch(clearAll());
   };
 
   const { name, email, phone, contactType } = formData;
 
-  const base: string = "Add Contact";
-
   return (
     <div className="add-contact-layout">
-      <h1>{base}</h1>
+      <h1> {current == null ? "Add Contact" : "Update Contact"}</h1>
       <Form
         name="contact_form"
         className="contact_form"
@@ -62,8 +65,9 @@ const AddContacts: React.FC<Props> = () => {
       >
         <Form.Item
           name="name"
-          rules={[{ required: true, message: "Please input Contact Name" }]}
+          // rules={[{ required: true, message: "Please input Contact Name" }]}
         >
+          {console.log({ name })}
           <Input
             type="name"
             name="name"
@@ -74,8 +78,9 @@ const AddContacts: React.FC<Props> = () => {
         </Form.Item>
         <Form.Item
           name="email"
-          rules={[{ required: true, message: "Please input Contact Email" }]}
+          //rules={[{ required: true, message: "Please input Contact Email" }]}
         >
+          {console.log({ email })}
           <Input
             type="email"
             name="email"
@@ -87,10 +92,11 @@ const AddContacts: React.FC<Props> = () => {
 
         <Form.Item
           name="phone"
-          rules={[
-            { required: true, message: "Please Input Contact Phone Number" },
-          ]}
+          // rules={[
+          //   { required: true, message: "Please Input Contact Phone Number" },
+          // ]}
         >
+          {console.log({ phone })}
           <InputNumber
             name="phone"
             value={phone}
@@ -104,16 +110,16 @@ const AddContacts: React.FC<Props> = () => {
           <code className="label-tag">Contact Type</code>
           <Form.Item>
             <Radio.Group name="contactType" value={contactType}>
-              <Radio onChange={onChange} value="personal">
+              <Radio onChange={onChange} value="Personal">
                 Personal
               </Radio>
-              <Radio value="professional" onChange={onChange}>
+              <Radio value="Professional" onChange={onChange}>
                 Professional
               </Radio>
             </Radio.Group>
           </Form.Item>
           <Button type="primary" htmlType="submit" block={true}>
-            Add Contact
+            {current == null ? "Add Contact" : "Update Contact"}
           </Button>
         </Form.Item>
       </Form>

@@ -3,7 +3,7 @@ import { Button, Card, Badge } from "antd";
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { IContacts } from "../../type.d";
-import { setCurrent } from "../../actions/contactAction";
+import { setCurrent, deleteContact } from "../../actions/contactAction";
 
 const Contacts: React.FC = () => {
   const dispatch = useDispatch();
@@ -11,33 +11,65 @@ const Contacts: React.FC = () => {
     (state: IContacts) => state.contactReducer
   );
 
-  const { contacts } = contactReducer;
+  const { contacts, filtered } = contactReducer;
 
   return (
     <div className="contact-layout">
       {contacts.length > 0 ? (
         <div>
-          {contacts.map((contact) => (
-            <Badge.Ribbon text="Professional" key={contact.name}>
-              <Card className="card-bg">
-                <h3>{contact.name}</h3>
-                <p>
-                  <MailOutlined /> {contact.email}
-                </p>
-                <p>
-                  <PhoneOutlined /> {contact.phone}
-                </p>
-                <Button
-                  style={{ backgroundColor: "#333" }}
-                  onClick={() => dispatch(setCurrent(contact))}
-                >
-                  Edit
-                </Button>
-                <Button style={{ backgroundColor: "red" }}>Delete</Button>
-              </Card>
-              <br />
-            </Badge.Ribbon>
-          ))}
+          {filtered !== null
+            ? filtered.map((contact) => (
+                <Badge.Ribbon text={contact.contactType} key={contact.name}>
+                  <Card className="card-bg">
+                    <h3>{contact.name}</h3>
+                    <p>
+                      <MailOutlined /> {contact.email}
+                    </p>
+                    <p>
+                      <PhoneOutlined /> {contact.phone}
+                    </p>
+                    <Button
+                      style={{ backgroundColor: "#333" }}
+                      onClick={() => dispatch(setCurrent(contact))}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      style={{ backgroundColor: "red" }}
+                      onClick={() => dispatch(deleteContact(contact))}
+                    >
+                      Delete
+                    </Button>
+                  </Card>
+                  <br />
+                </Badge.Ribbon>
+              ))
+            : contacts.map((contact) => (
+                <Badge.Ribbon text={contact.contactType} key={contact.name}>
+                  <Card className="card-bg">
+                    <h3>{contact.name}</h3>
+                    <p>
+                      <MailOutlined /> {contact.email}
+                    </p>
+                    <p>
+                      <PhoneOutlined /> {contact.phone}
+                    </p>
+                    <Button
+                      style={{ backgroundColor: "#333" }}
+                      onClick={() => dispatch(setCurrent(contact))}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      style={{ backgroundColor: "red" }}
+                      onClick={() => dispatch(deleteContact(contact))}
+                    >
+                      Delete
+                    </Button>
+                  </Card>
+                  <br />
+                </Badge.Ribbon>
+              ))}
         </div>
       ) : (
         <h1>Add a Contact, It would show here!</h1>

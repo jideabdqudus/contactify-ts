@@ -1,4 +1,10 @@
-import { ADD_CONTACT, EDIT_CONTACT, SET_CURRENT } from "../constants/types";
+import {
+  ADD_CONTACT,
+  DELETE_CONTACT,
+  EDIT_CONTACT,
+  FILTER_CONTACT,
+  SET_CURRENT,
+} from "../constants/types";
 
 const initialState = {
   contacts: [
@@ -7,18 +13,19 @@ const initialState = {
       name: "Sameerah Ajenifuja",
       email: "asameerah@gmail.com",
       phone: 8090,
-      contactType: "professional",
+      contactType: "Professional",
     },
     {
       id: 2,
       name: "Hanan Ajenifuja",
       email: "hanan@gmail.com",
       phone: 70090,
-      contactType: "personal",
+      contactType: "Personal",
     },
   ],
   loading: true,
   current: null,
+  filtered: null,
 };
 
 const contactReducer = (state = initialState, action) => {
@@ -37,6 +44,22 @@ const contactReducer = (state = initialState, action) => {
           contact.id === action.payload.id ? action.payload : contact
         ),
         loading: false,
+      };
+    case DELETE_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          (contact) => contact !== action.payload
+        ),
+      };
+    case FILTER_CONTACT:
+      return {
+        ...state,
+        filtered: state.contacts.filter(
+          (contact) =>
+            contact.name.toLowerCase().indexOf(action.payload.toLowerCase()) !==
+            -1
+        ),
       };
     default:
       return state;

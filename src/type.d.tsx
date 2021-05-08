@@ -15,8 +15,9 @@ export interface IContact {
 
 export interface IEachContact {
   contacts: IContact[];
-  current: any;
+  current: IContact;
   loading: boolean;
+  filtered: IContact[];
 }
 
 export interface IContacts {

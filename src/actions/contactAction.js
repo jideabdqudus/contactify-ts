@@ -6,6 +6,8 @@ import {
   CLEAR_CURRENT,
   FILTER_CONTACT,
   CLEAR_FILTER,
+  CLEAR_ALL,
+  DELETE_CONTACT,
 } from "../constants/types";
 
 export const addContact = (contact) => (dispatch) => {
@@ -28,14 +30,26 @@ export const setCurrent = (contact) => (dispatch) => {
   dispatch({ type: SET_CURRENT, payload: contact });
 };
 
-const clearCurrent = (dispatch) => {
+export const clearCurrent = (dispatch) => {
   dispatch({ type: CLEAR_CURRENT });
 };
 
-const filterContacts = (text) => (dispatch) => {
+export const filterContacts = (text) => (dispatch) => {
   dispatch({ type: FILTER_CONTACT, payload: text });
 };
 
-const clearFilter = (dispatch) => {
+export const clearFilter = (dispatch) => {
   dispatch({ type: CLEAR_FILTER });
+};
+
+export const clearAll = (dispatch) => {
+  dispatch({ type: CLEAR_ALL });
+};
+
+export const deleteContact = (contact) => (dispatch) => {
+  try {
+    dispatch({ type: DELETE_CONTACT, payload: contact });
+  } catch (error) {
+    dispatch({ type: SET_ERROR, payload: error });
+  }
 };
