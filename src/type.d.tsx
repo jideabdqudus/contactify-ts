@@ -4,9 +4,26 @@ export interface IAuth {
   password: string;
 }
 
+
+export interface IContact {
+  name: string;
+  email: string;
+  phone: number;
+  contactType: string;
+}
+
+export interface IEachContact {
+  contacts: IContact[]
+}
+
+
+export interface IContacts {
+  contactReducer: IEachContact;
+}
+
 export type AuthState = {
   profile: object;
-  loading: boolean
+  loading: boolean;
 };
 
 export type AuthAction = {

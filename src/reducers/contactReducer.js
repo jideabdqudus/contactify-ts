@@ -5,7 +5,7 @@ const initialState = {
     {
       name: "Sameerah Ajenifuja",
       email: "asameerah@gmail.com",
-      phone: 08090,
+      phone: 8090,
       contactType: "professional",
     },
     {
@@ -22,14 +22,11 @@ const contactReducer = (state = initialState, action) => {
     case ADD_CONTACT:
       return {
         ...state,
-        ...contacts,
-        contacts: action.payload,
+        contacts: [...state.contacts, action.payload],
       };
     default:
-      return {
-        state,
-      };
+      return state;
   }
 };
 
-export default contactReducer
+export default contactReducer;

@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Radio, InputNumber } from "antd";
+import { IContact } from "../../type.d";
+import { addContact } from "../../actions/contactAction";
+import { useDispatch } from "react-redux";
 
 interface Props {}
 
-interface FormNode {
-  name: string;
-  email: string;
-  phone: number;
-  contactType: string;
-}
-
 const AddContacts: React.FC<Props> = () => {
-  const [formData, setFormData] = useState<FormNode>({
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState<IContact>({
     name: "",
     email: "",
     phone: 0,
@@ -27,6 +25,7 @@ const AddContacts: React.FC<Props> = () => {
   };
 
   const onFinish = () => {
+    dispatch(addContact(formData));
     console.log(formData);
   };
 
