@@ -3,7 +3,7 @@ import { Button, Card, Badge } from "antd";
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { IContacts } from "../../type.d";
-import { editContact } from "../../actions/contactAction";
+import { setCurrent } from "../../actions/contactAction";
 
 const Contacts: React.FC = () => {
   const dispatch = useDispatch();
@@ -12,10 +12,6 @@ const Contacts: React.FC = () => {
   );
 
   const { contacts } = contactReducer;
-
-  const onClick = (item: any) => {
-    dispatch(editContact(item));
-  };
 
   return (
     <div className="contact-layout">
@@ -33,7 +29,7 @@ const Contacts: React.FC = () => {
                 </p>
                 <Button
                   style={{ backgroundColor: "#333" }}
-                  onClick={() => onClick(contact)}
+                  onClick={() => dispatch(setCurrent(contact))}
                 >
                   Edit
                 </Button>

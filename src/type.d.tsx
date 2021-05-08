@@ -1,13 +1,12 @@
 export interface IAuth {
-  id: number,
+  id: number;
   username: string;
   mail: string;
   password: string;
 }
 
-
 export interface IContact {
-  id?: number,
+  id?: number;
   name: string;
   email: string;
   phone: number;
@@ -15,9 +14,10 @@ export interface IContact {
 }
 
 export interface IEachContact {
-  contacts: IContact[]
+  contacts: IContact[];
+  current: any;
+  loading: boolean;
 }
-
 
 export interface IContacts {
   contactReducer: IEachContact;

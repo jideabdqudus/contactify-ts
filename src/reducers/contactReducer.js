@@ -1,4 +1,4 @@
-import { ADD_CONTACT, EDIT_CONTACT } from "../constants/types";
+import { ADD_CONTACT, EDIT_CONTACT, SET_CURRENT } from "../constants/types";
 
 const initialState = {
   contacts: [
@@ -17,6 +17,8 @@ const initialState = {
       contactType: "personal",
     },
   ],
+  loading: true,
+  current: null,
 };
 
 const contactReducer = (state = initialState, action) => {
@@ -26,6 +28,8 @@ const contactReducer = (state = initialState, action) => {
         ...state,
         contacts: [...state.contacts, action.payload],
       };
+    case SET_CURRENT:
+      return { ...state, current: action.payload };
     case EDIT_CONTACT:
       return {
         ...state,

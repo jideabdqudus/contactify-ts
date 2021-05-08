@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Radio, InputNumber } from "antd";
-import { IContact } from "../../type.d";
+import { IContact, IContacts } from "../../type.d";
 import { addContact } from "../../actions/contactAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Props {}
 
 const AddContacts: React.FC<Props> = () => {
   const dispatch = useDispatch();
+  const contactReducer = useSelector(
+    (state: IContacts) => state.contactReducer
+  );
+
+  const { current } = contactReducer;
 
   const [formData, setFormData] = useState<IContact>({
     name: "",
@@ -15,6 +20,19 @@ const AddContacts: React.FC<Props> = () => {
     phone: 0,
     contactType: "",
   });
+
+  useEffect(() => {
+    if (current !== null) {
+      setFormData(current);
+    } else {
+      setFormData({
+        name: "",
+        email: "",
+        phone: 0,
+        contactType: "personal",
+      });
+    }
+  }, [contactReducer, current]);
 
   const onChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -78,6 +96,7 @@ const AddContacts: React.FC<Props> = () => {
             value={phone}
             onChange={onHandleChange}
             style={{ width: "100%" }}
+            placeholder="Phone"
           />
         </Form.Item>
 
