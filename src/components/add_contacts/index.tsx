@@ -49,7 +49,6 @@ const AddContacts: React.FC<Props> = () => {
     } else {
       dispatch(editContact(formData));
     }
-    console.log("errorrr")
     //dispatch(clearAll());
   };
 
@@ -68,7 +67,7 @@ const AddContacts: React.FC<Props> = () => {
           name="name"
           // rules={[{ required: true, message: "Please input Contact Name" }]}
         >
-          {console.log({ name })}
+
           <Input
             type="name"
             name="name"
@@ -81,7 +80,6 @@ const AddContacts: React.FC<Props> = () => {
           name="email"
           //rules={[{ required: true, message: "Please input Contact Email" }]}
         >
-          {console.log({ email })}
           <Input
             type="email"
             name="email"
@@ -97,7 +95,6 @@ const AddContacts: React.FC<Props> = () => {
           //   { required: true, message: "Please Input Contact Phone Number" },
           // ]}
         >
-          {console.log({ phone })}
           <InputNumber
             name="phone"
             value={phone}

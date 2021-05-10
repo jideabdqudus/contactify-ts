@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import NavBar from "./layouts/nav/index";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import store from "./store";
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import PrivateRoute from "./routes/privateRoutes";
+import { loadUser } from "./actions/authAction";
 
 const App: React.FC = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  });
   return (
     <Provider store={store}>
       <Router>
@@ -28,7 +32,7 @@ const App: React.FC = () => {
               path="/register"
               render={(props) => <Register title="Account Register" />}
             />
-            <Route exact path="/dashboard" render={(props) => <Dashboard />} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
         </div>
       </Router>

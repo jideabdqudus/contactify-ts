@@ -1,19 +1,23 @@
 import React, { Fragment } from "react";
 import { PhoneOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Button } from "antd";
 
-import { IAuthenticate } from "../../type.d";
+import { logout } from "../../actions/authAction";
 
 interface Props {
   title: string;
 }
 
 const NavBar: React.FC<Props> = ({ title }) => {
-  const auth = useSelector((state: IAuthenticate) => state.auth);
-  {
-    console.log(auth.profile.user.username);
-  }
+  const dispatch = useDispatch();
+  const auth = useSelector((state: any) => state.auth);
+
+  const onClick = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="navbar">
       <nav className="navbar-bg">
@@ -23,9 +27,11 @@ const NavBar: React.FC<Props> = ({ title }) => {
         </Fragment>
         {auth.isAuthenticated ? (
           <div className="navbar-links">
-            <Link to="/register" className="custom-nav-link"></Link>
+            <span className="custom-nav-link">
+              {auth.profile.user.username}
+            </span>
             <Link to="/" className="custom-nav-link">
-              Logout
+              <Button onClick={onClick}>Logout</Button>
             </Link>
           </div>
         ) : (
