@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
-import { register, clearError } from "../../actions/authAction";
+import { register } from "../../actions/authAction";
 import { appHelpers } from "../../apphelpers/appHelpers";
 import { IAuthenticate } from "../../type.d";
 import { Redirect } from "react-router";
@@ -53,6 +53,9 @@ const RegisterForm: React.FC<Props> = () => {
     }
   };
 
+  if (auth.isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   const { username, email, password, confirmPassword } = formData;
 

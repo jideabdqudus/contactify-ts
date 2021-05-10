@@ -3,7 +3,6 @@ import {
   REGISTER_ACCOUNT,
   REGISTER_FAIL,
   LOGIN_FAIL,
-  CLEAR_ERROR,
 } from "../constants/types.js";
 
 const initialState = {
@@ -19,9 +18,12 @@ const authReducer = (state = initialState, action) => {
     case REGISTER_ACCOUNT:
       return {
         ...state,
-        profile: action.payload,
+        profile: action.payload.data,
         loading: false,
-        error: action.payload.status,
+        error: {
+          status: action.payload.status,
+          statusText: action.payload.statusText,
+        },
         isAuthenticated: true,
       };
     case LOGIN_ACCOUNT:
@@ -42,12 +44,6 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         loading: false,
         message: action.payload.data,
-      };
-    case CLEAR_ERROR:
-      return {
-        ...state,
-        error: null,
-        message: null,
       };
     default:
       return state;

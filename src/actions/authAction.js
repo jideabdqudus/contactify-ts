@@ -2,10 +2,10 @@ import {
   LOGIN_ACCOUNT,
   REGISTER_ACCOUNT,
   REGISTER_FAIL,
-  CLEAR_ERROR,
-  LOGIN_FAIL
+  LOGIN_FAIL,
 } from "../constants/types";
 import axios from "axios";
+import { appHelpers } from "../apphelpers/appHelpers";
 
 export const register = (username, email, password) => async (dispatch) => {
   const data = JSON.stringify({
@@ -21,10 +21,14 @@ export const register = (username, email, password) => async (dispatch) => {
   axios
     .post("http://127.0.0.1:8000/api/auth/register", data, config)
     .then((response) => {
-      console.log(response.status);
-      dispatch({ type: REGISTER_ACCOUNT, payload: data });
+      appHelpers.alertSuccess("Account Created Succesfully", 5000);
+      console.log(response);
+      dispatch({ type: REGISTER_ACCOUNT, payload: response });
     })
     .catch((error) => {
+      for (const [key, value] of Object.entries(error.response.data)) {
+        appHelpers.alertError(`${key}: ${value}`, 5000);
+      }
       dispatch({ type: REGISTER_FAIL, payload: error.response });
     });
 };
@@ -36,23 +40,3 @@ export const login = (profile) => async (dispatch) => {
     dispatch({ type: LOGIN_FAIL, payload: error.response });
   }
 };
-
-export const clearError = () => async (dispatch) => {
-  dispatch({ type: CLEAR_ERROR });
-};
-
-
-// setTimeout(() => {
-//   dispatch(clearError());
-// }, 1000);
-
-
-
-// if (auth.isAuthenticated === true) {
-//   appHelpers.alertSuccess("Account Created", 5000);
-//   <Redirect to="/" />;
-// } else {
-//   for (const [key, value] of Object.entries(auth.message)) {
-//     appHelpers.alertError(`${key}: ${value}`, 5000);
-//   }
-// }
