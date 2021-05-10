@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import store from "./store";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
       <Router>
         <div className="App">
           <NavBar title={"Contact Keeper"} />
+          <ToastContainer />
           <Switch>
             <Route
               exact

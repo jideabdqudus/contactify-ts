@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { register } from "../../actions/authAction";
+import { register, clearError } from "../../actions/authAction";
+import { appHelpers } from "../../apphelpers/appHelpers";
+import { IAuthenticate } from "../../type.d";
+import { Redirect } from "react-router";
 
 interface Props {}
 
@@ -15,6 +18,7 @@ interface FormNode {
 
 const RegisterForm: React.FC<Props> = () => {
   const dispatch = useDispatch();
+  const auth = useSelector((state: IAuthenticate) => state.auth);
 
   const [formData, setFormData] = useState<FormNode>({
     username: "",
@@ -28,8 +32,27 @@ const RegisterForm: React.FC<Props> = () => {
   };
 
   const onFinish = () => {
-    dispatch(register(username, email, password));
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === ""
+    ) {
+      appHelpers.alertError("All fields are compulsory", 5000);
+    } else if (password !== confirmPassword) {
+      appHelpers.alertWarning("The passwords need to be the same", 5000);
+    } else if (password.length < 8) {
+      appHelpers.alertWarning("Password Length must be more than 8", 5000);
+    } else if (appHelpers.validatePassword(password) === false) {
+      appHelpers.alertWarning(
+        "Passwords must contain at least 1 Capital letter, 1 small letter and a special character",
+        5000
+      );
+    } else {
+      dispatch(register(username, email, password));
+    }
   };
+
 
   const { username, email, password, confirmPassword } = formData;
 
@@ -42,10 +65,7 @@ const RegisterForm: React.FC<Props> = () => {
         onFinish={onFinish}
       >
         <label htmlFor="username">Name</label>
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: "Please input your name" }]}
-        >
+        <Form.Item name="username">
           <Input
             type="text"
             value={username}
@@ -54,17 +74,11 @@ const RegisterForm: React.FC<Props> = () => {
           />
         </Form.Item>
         <label>Email</label>
-        <Form.Item
-          name="email"
-          rules={[{ required: true, message: "Please input your Email" }]}
-        >
+        <Form.Item name="email">
           <Input type="email" name="email" value={email} onChange={onChange} />
         </Form.Item>
         <label>Password</label>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: "Please input your Password" }]}
-        >
+        <Form.Item name="password">
           <Input
             type="password"
             name="password"
@@ -73,10 +87,7 @@ const RegisterForm: React.FC<Props> = () => {
           />
         </Form.Item>
         <label>Confirm Password</label>
-        <Form.Item
-          name="confirmPassword"
-          rules={[{ required: true, message: "Please confirm your Password" }]}
-        >
+        <Form.Item name="confirmPassword">
           <Input
             type="password"
             name="confirmPassword"
