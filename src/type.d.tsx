@@ -6,6 +6,7 @@ export interface IContact {
   contactType: string;
 }
 
+
 export interface IAuth {
   profile: object;
   loading: boolean;

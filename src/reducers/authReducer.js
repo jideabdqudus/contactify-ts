@@ -10,12 +10,15 @@ const initialState = {
   loading: true,
   error: null,
   message: null,
+  token: localStorage.getItem("token"),
   isAuthenticated: false,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOGIN_ACCOUNT:
     case REGISTER_ACCOUNT:
+      localStorage.setItem("token", action.payload.data.token);
       return {
         ...state,
         profile: action.payload.data,
@@ -25,12 +28,6 @@ const authReducer = (state = initialState, action) => {
           statusText: action.payload.statusText,
         },
         isAuthenticated: true,
-      };
-    case LOGIN_ACCOUNT:
-      return {
-        ...state,
-        profile: action.payload,
-        loading: false,
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:

@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router";
 
 import { login } from "../../actions/authAction";
+import { appHelpers } from "../../apphelpers/appHelpers";
+import { IAuthenticate } from "../../type.d";
 
 interface Props {}
 
 interface FormNode {
-  email: string;
+  username: string;
   password: string;
 }
 
 const LoginForm: React.FC<Props> = () => {
   const dispatch = useDispatch();
+  const auth = useSelector((state: IAuthenticate) => state.auth);
 
   const [formData, setFormData] = useState<FormNode>({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -24,10 +28,18 @@ const LoginForm: React.FC<Props> = () => {
   };
 
   const onFinish = (values: any) => {
-    dispatch(login(formData));
+    if (username === "" || password === "") {
+      appHelpers.alertError("All fields are compulsory", 5000);
+    } else {
+      dispatch(login(formData));
+    }
   };
 
-  const { email, password } = formData;
+  const { username, password } = formData;
+
+  if (auth.isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <div className="form-layout">
@@ -37,18 +49,24 @@ const LoginForm: React.FC<Props> = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
-        <label>Email</label>
-        <Form.Item
+        {/* <label>Email</label>
+         <Form.Item
           name="email"
           rules={[{ required: true, message: "Please input your Email" }]}
         >
           <Input type="email" name="email" onChange={onChange} value={email} />
+        </Form.Item> */}
+        <label>Username</label>
+        <Form.Item name="username">
+          <Input
+            type="text"
+            name="username"
+            onChange={onChange}
+            value={username}
+          />
         </Form.Item>
         <label>Password</label>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: "Please input your Password" }]}
-        >
+        <Form.Item name="password">
           <Input
             type="password"
             name="password"
