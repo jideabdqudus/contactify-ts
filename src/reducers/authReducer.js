@@ -5,7 +5,7 @@ import {
 } from "../constants/types.js";
 
 const initialState = {
-  profile: {},
+  profile: null,
   loading: true,
   error: null,
 };

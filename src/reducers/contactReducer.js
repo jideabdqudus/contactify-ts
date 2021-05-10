@@ -7,22 +7,7 @@ import {
 } from "../constants/types";
 
 const initialState = {
-  contacts: [
-    {
-      id: 1,
-      name: "Sameerah Ajenifuja",
-      email: "asameerah@gmail.com",
-      phone: 8090,
-      contactType: "Professional",
-    },
-    {
-      id: 2,
-      name: "Hanan Ajenifuja",
-      email: "hanan@gmail.com",
-      phone: 70090,
-      contactType: "Personal",
-    },
-  ],
+  contacts: [],
   loading: true,
   current: null,
   filtered: null,

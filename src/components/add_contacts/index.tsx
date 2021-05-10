@@ -3,7 +3,7 @@ import { Form, Input, Button, Radio, InputNumber } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IContact, IContacts } from "../../type.d";
-import { addContact, editContact, clearAll } from "../../actions/contactAction";
+import { addContact, editContact,} from "../../actions/contactAction";
 
 interface Props {}
 
@@ -49,7 +49,8 @@ const AddContacts: React.FC<Props> = () => {
     } else {
       dispatch(editContact(formData));
     }
-    dispatch(clearAll());
+    console.log("errorrr")
+    //dispatch(clearAll());
   };
 
   const { name, email, phone, contactType } = formData;

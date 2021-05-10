@@ -28,7 +28,7 @@ const RegisterForm: React.FC<Props> = () => {
   };
 
   const onFinish = () => {
-    dispatch(register(formData));
+    dispatch(register(username, email, password));
   };
 
   const { username, email, password, confirmPassword } = formData;
