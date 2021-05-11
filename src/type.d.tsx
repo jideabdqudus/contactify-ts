@@ -3,7 +3,7 @@ export interface IContact {
   name: string;
   email: string;
   phone: number;
-  contactType: string;
+  type: string;
 }
 
 

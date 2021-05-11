@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Badge } from "antd";
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { IContacts } from "../../type.d";
-import { setCurrent, deleteContact } from "../../actions/contactAction";
+import {
+  setCurrent,
+  deleteContact,
+  getContact,
+} from "../../actions/contactAction";
 
 const Contacts: React.FC = () => {
   const dispatch = useDispatch();
   const contactReducer = useSelector(
     (state: IContacts) => state.contactReducer
   );
+  useEffect(() => {
+    dispatch(getContact());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { contacts, filtered } = contactReducer;
 
@@ -19,7 +27,7 @@ const Contacts: React.FC = () => {
         <div>
           {filtered !== null
             ? filtered.map((contact) => (
-                <Badge.Ribbon text={contact.contactType} key={contact.name}>
+                <Badge.Ribbon text={contact.type} key={contact.name}>
                   <Card className="card-bg">
                     <h3>{contact.name}</h3>
                     <p>
@@ -45,7 +53,7 @@ const Contacts: React.FC = () => {
                 </Badge.Ribbon>
               ))
             : contacts.map((contact) => (
-                <Badge.Ribbon text={contact.contactType} key={contact.name}>
+                <Badge.Ribbon text={contact.type} key={contact.name}>
                   <Card className="card-bg">
                     <h3>{contact.name}</h3>
                     <p>

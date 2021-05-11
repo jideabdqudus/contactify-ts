@@ -27,11 +27,16 @@ const NavBar: React.FC<Props> = ({ title }) => {
         </Fragment>
         {auth.isAuthenticated ? (
           <div className="navbar-links">
-            <span className="custom-nav-link">
+            <span
+              className="custom-nav-link"
+              style={{ textTransform: "uppercase" }}
+            >
               {auth.profile.user.username}
             </span>
             <Link to="/" className="custom-nav-link">
-              <Button onClick={onClick}>Logout</Button>
+              <Button className="custom-nav-button" onClick={onClick}>
+                Logout
+              </Button>
             </Link>
           </div>
         ) : (

@@ -4,17 +4,25 @@ import {
   EDIT_CONTACT,
   FILTER_CONTACT,
   SET_CURRENT,
+  GET_CONTACT,
 } from "../constants/types";
 
 const initialState = {
   contacts: [],
-  loading: true,
+  loading: false,
   current: null,
   filtered: null,
 };
 
 const contactReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_CONTACT:
+      return {
+        contacts: action.payload,
+        loading: false,
+        current: null,
+        filtered: null,
+      };
     case ADD_CONTACT:
       return {
         ...state,

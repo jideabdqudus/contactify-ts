@@ -3,7 +3,7 @@ import { Form, Input, Button, Radio, InputNumber } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IContact, IContacts } from "../../type.d";
-import { addContact, editContact,} from "../../actions/contactAction";
+import { addContact, editContact } from "../../actions/contactAction";
 
 interface Props {}
 
@@ -19,7 +19,7 @@ const AddContacts: React.FC<Props> = () => {
     name: "",
     email: "",
     phone: 0,
-    contactType: "",
+    type: "",
   });
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const AddContacts: React.FC<Props> = () => {
         name: "",
         email: "",
         phone: 0,
-        contactType: "personal",
+        type: "personal",
       });
     }
   }, [contactReducer, current]);
@@ -49,10 +49,9 @@ const AddContacts: React.FC<Props> = () => {
     } else {
       dispatch(editContact(formData));
     }
-    //dispatch(clearAll());
   };
 
-  const { name, email, phone, contactType } = formData;
+  const { name, email, phone, type } = formData;
 
   return (
     <div className="add-contact-layout">
@@ -63,11 +62,7 @@ const AddContacts: React.FC<Props> = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
-        <Form.Item
-          name="name"
-          // rules={[{ required: true, message: "Please input Contact Name" }]}
-        >
-
+        <Form.Item name="name">
           <Input
             type="name"
             name="name"
@@ -76,10 +71,7 @@ const AddContacts: React.FC<Props> = () => {
             onChange={onChange}
           />
         </Form.Item>
-        <Form.Item
-          name="email"
-          //rules={[{ required: true, message: "Please input Contact Email" }]}
-        >
+        <Form.Item name="email">
           <Input
             type="email"
             name="email"
@@ -89,12 +81,7 @@ const AddContacts: React.FC<Props> = () => {
           />
         </Form.Item>
 
-        <Form.Item
-          name="phone"
-          // rules={[
-          //   { required: true, message: "Please Input Contact Phone Number" },
-          // ]}
-        >
+        <Form.Item name="phone">
           <InputNumber
             name="phone"
             value={phone}
@@ -107,7 +94,7 @@ const AddContacts: React.FC<Props> = () => {
         <Form.Item>
           <code className="label-tag">Contact Type</code>
           <Form.Item>
-            <Radio.Group name="contactType" value={contactType}>
+            <Radio.Group name="type" value={type}>
               <Radio onChange={onChange} value="Personal">
                 Personal
               </Radio>

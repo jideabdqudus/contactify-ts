@@ -15,6 +15,7 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ADD_CONTACT = "ADD_CONTACT";
 export const EDIT_CONTACT = "EDIT_CONTACT";
 export const DELETE_CONTACT = "DELETE_CONTACT";
+export const GET_CONTACT = "GET_CONTACT";
 export const FILTER_CONTACT = "FILTER_CONTACT";
 
 export const SET_CURRENT = "SET_CURRENT";
